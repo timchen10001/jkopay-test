@@ -1,23 +1,28 @@
-import icons from './Assets/img_doctor_90@3x.svg';
-import './styles/App.css';
+import doctor from "./Assets/img_doctor_90@3x.svg";
+import patient from "./Assets/img_patient_90@3x.svg";
+import { AccountType } from "./components/accountType/AccountType";
+import "./styles/App.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={icons} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>你好</div>
+      <AccountType
+        title={"Choose Account Type"}
+        accountTypes={[
+          {
+            avator: doctor,
+            name: "Doctor",
+          },
+          {
+            avator: patient,
+            name: "Patient",
+          },
+          // { avator: patient, name: "Patient" },
+          // { avator: patient, name: "Patient" },
+          // 增加其餘 頭像與資訊於此
+        ]}
+      />
     </div>
   );
 }

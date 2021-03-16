@@ -1,0 +1,41 @@
+.account__type {
+  text-align: center;
+}
+
+.account__type__title {
+  padding: 4vh;
+  color: var(--theme-color);
+  font-weight: 450;
+}
+
+.account__type__list__item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  /* padding: 1rem 2rem; */
+  /* background-color: blue; */
+}
+
+.account__type__item {
+  position: relative;
+  border: 1px solid var(--default-color);
+  border-radius: 5px;
+  padding: 0.5rem 1.2rem;
+  margin: 1vw;
+}
+.selected {
+  border: 1px solid var(--theme-color);
+}
+
+.account__type__item__avator {
+  min-width: 8rem;
+}
+
+.thick__icon {
+  position: absolute;
+  z-index: 1;
+  right: -9px;
+  bottom: -9px;
+  max-width: 2rem;
+}
