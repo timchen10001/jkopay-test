@@ -1,4 +1,14 @@
 :root {
-  --theme-color: #37b6ed;
+  --theme-color: #37b6eddc;
   --default-color: #EAEDF1;
+  --default-font-color: #B1B1B1;
+  --deep-default-font-color: #999999;
+}
+
+.App {
+  position: relative;
+}
+
+.selected {
+  border-color: var(--theme-color);
 }

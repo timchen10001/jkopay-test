@@ -1,4 +1,4 @@
-import "./AccountType.css";
+import "../../styles/AccountType.css";
 import thick from "../../Assets/tick.svg";
 import React, { InputHTMLAttributes } from "react";
 
@@ -16,10 +16,10 @@ export const AccountTypeItem: React.FC<AccountTypeItemProps> = ({
 }) => {
   return (
     <div
+      {...props}
       className={
         !selected ? `account__type__item` : `account__type__item selected`
       }
-      {...props}
     >
       <img src={avator} alt={name} className="account__type__item__avator" />
       <p>{name}</p>

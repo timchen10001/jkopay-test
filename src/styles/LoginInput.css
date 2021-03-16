@@ -1,0 +1,78 @@
+.login__input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input__field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 8vh;
+  border: 1px solid var(--default-color);
+  border-radius: 5px;
+  width: 80%;
+  max-width: 400px;
+}
+.input__field__label {
+  position: absolute;
+  top: -15px;
+  left: 15px;
+  background-color: var(--theme-color);
+  padding: 1% 1.2%;
+  border-radius: 3px;
+  color: white;
+  font-size: 0.5rem;
+}
+
+.input__field__icon {
+  max-width: 1.65rem;
+  margin: 0.5rem;
+}
+
+.input__field__content {
+  flex: 1;
+  height: 2rem;
+  font-size: medium;
+  border: none;
+  padding: 0 1%;
+}
+.input__field__content:focus {
+  outline: none;
+  border: none;
+}
+
+.input__field__complementary * {
+  text-decoration: none;
+  color: var(--theme-color);
+  border-left: 1.5px solid var(--default-color);
+  padding: 0.35rem .7rem;
+  font-size: .8rem;
+}
+
+.input__submit {
+  width: 80%;
+  max-width: 400px;
+  color: var(--deep-default-font-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .5rem;
+}
+.input__submit__complementary a {
+  text-decoration: none;
+  color: var(--theme-color);
+
+}
+
+.input__submit__button {
+  background-color: var(--theme-color);
+  border: none;
+  color: white;
+  padding: 0.6rem 2rem;
+  border-radius: 6px;
+}
+.input__submit__button:focus {
+  outline: none;
+  border: none;
+}

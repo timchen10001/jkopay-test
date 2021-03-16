@@ -1,45 +1,69 @@
-import "./AccountType.css";
-import React, { useState } from "react";
-import { AccountTypeItem, AccountTypeItemProps } from "./AccountTypeItem";
+import React, { InputHTMLAttributes, useState } from "react";
 import useRWD from "../../hooks/useRWD";
-import { accountTypeInfo } from "../../types";
+import { actionTypes } from "../../reducers/reducer";
+import { useStateValue } from "../../StateProvider";
+import "../../styles/AccountType.css";
+import { accountTypeDescriptionProps, accountTypeInfo } from "../../types";
+import { AccountDescription } from "./AccountDescription";
+import { AccountTypeItem } from "./AccountTypeItem";
 
-interface AccountTypeProps {
+type AccountTypeProps = InputHTMLAttributes<HTMLInputElement> & {
+  name: string;
   title: string;
-  accountTypes: accountTypeInfo[];
-}
+  types: accountTypeInfo[];
+  description: accountTypeDescriptionProps;
+};
 
 export const AccountType: React.FC<AccountTypeProps> = ({
   title,
-  accountTypes,
+  description,
+  types,
+  size: _,
+  // ...props
 }) => {
+  const [, dispatch] = useStateValue();
   const [select, setSelect] = useState(-1);
-  // const device = useRWD();
+  const device = useRWD();
+  const isMobile = device === "mobile";
+  const isNotSelected = select === -1;
 
   return (
     <div className="account__type">
       <h3 className="account__type__title">{title}</h3>
-      <ul className="account__type__list__item">
-        {accountTypes.map((accountType, index) => (
+      <ul
+        className="account__type__list__item"
+        style={{ cursor: isMobile ? "none" : "pointer" }}
+      >
+        {types.map((type, index) => (
           <AccountTypeItem
-            {...accountType}
+            {...type}
             key={`account-type-${index}`}
             selected={select === index}
             onClick={() => {
+              let accountType: string;
               if (select === index) {
                 setSelect(-1);
+                accountType = "default";
               } else {
                 setSelect(index);
+                accountType = types[index].name;
               }
+              dispatch({
+                type: actionTypes.SET_ACCOUNT_TYPE,
+                accountType,
+              });
             }}
           />
         ))}
       </ul>
-      {select === -1 ? null : (
-        <p>{`Hello ${accountTypes[
-          select
-        ].name.toLowerCase()}! Please fill out the form below to get started`}</p>
-      )}
+      <p className="account__type__list__description">
+        <AccountDescription
+          description={
+            isNotSelected ? description.default : description.withState
+          }
+          replacements={isNotSelected ? [] : types[select].replacements}
+        />
+      </p>
     </div>
   );
 };
