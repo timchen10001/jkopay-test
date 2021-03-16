@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+## 文件說明
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1, Design 目錄是設計圖
+2, Assets 是素材
 
-## Available Scripts
+## 製作說明
 
-In the project directory, you can run:
+1, 請在 https://codesandbox.io/ 新增一個 React 專案。
+2, 利用 Assets 中的素材，製作 Design 目錄中的設計圖。
+3, 可以使用除了 UI lib 以外的 npm 套件。
 
-### `yarn start`
+## 情境/需求
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1, 設計師只提供手機的設計圖，但網頁也需要正常顯示。
+2, 設計中的 Accout type 會可能修改成三個頭像或四個頭像。
+3, 設計中的全部元件都有可能會在其他專案再次使用。
+4, 密碼檢查：密碼的任意連續 6 碼，不可以和帳號的任意連續 6 碼重複。
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 驗證密碼說明
 
-### `yarn test`
+username: abc12345
+password: xxabc123wer
+結果：不通過
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+username: abc12345
+password: c12345er12fda
+結果：不通過
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+username: abc12345
+password: c124345ksfh
+結果：通過
