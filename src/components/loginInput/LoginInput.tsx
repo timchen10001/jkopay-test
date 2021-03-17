@@ -1,20 +1,24 @@
-import "../../styles/LoginInput.css";
 import React, { useState } from "react";
 import emailIcon from "../../Assets/email.svg";
 import lockIcon from "../../Assets/padlock.svg";
 import { useCancelFocus } from "../../hooks/useCancelFocus";
 import { actionTypes } from "../../reducers/reducer";
 import { useStateValue } from "../../StateProvider";
+import "../../styles/LoginInput.css";
+import { FieldError } from "../../types";
 import { InputField } from "./InputField";
 import { InputSubmit } from "./InputSubmit";
-import { validators } from "../../utils/validators";
-import { FieldError } from "../../types";
 
-interface LoginInputProps {}
+interface LoginInputProps {
+  error: [
+    FieldError | null,
+    React.Dispatch<React.SetStateAction<FieldError | null>>
+  ];
+}
 
-export const LoginInput: React.FC<LoginInputProps> = () => {
-  const [data, dispatch] = useStateValue();
-  const [fieldError, setFieldError] = useState<FieldError>();
+export const LoginInput: React.FC<LoginInputProps> = ({ error }) => {
+  const [fieldError, setFieldError] = error;
+  const [, dispatch] = useStateValue();
   const [select, setSelect] = useState<"username" | "password" | undefined>();
 
   useCancelFocus((e) => {
@@ -24,16 +28,11 @@ export const LoginInput: React.FC<LoginInputProps> = () => {
   });
 
   return (
-    <form className="login__input" onSubmit={e => {
-      e.preventDefault();
-      validators(data, (fieldError) => {
-        setFieldError(fieldError);
-      });
-      
-    }} >
+    <div className="login__input" onChange={() => setFieldError(null)}>
       <InputField
         selected={select === "username"}
         icon={emailIcon}
+        error={fieldError?.field === "username"}
         name="username"
         onFocus={() => setSelect("username")}
         onChange={(e) => {
@@ -47,6 +46,7 @@ export const LoginInput: React.FC<LoginInputProps> = () => {
         mt="1rem"
         selected={select === "password"}
         icon={lockIcon}
+        error={fieldError?.field === "password"}
         name="password"
         type="password"
         onFocus={() => setSelect("password")}
@@ -68,6 +68,6 @@ export const LoginInput: React.FC<LoginInputProps> = () => {
           </p>
         }
       />
-    </form>
+    </div>
   );
 };

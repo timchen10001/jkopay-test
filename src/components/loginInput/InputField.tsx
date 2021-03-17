@@ -1,4 +1,5 @@
 import React, { InputHTMLAttributes } from "react";
+import { FieldError } from "../../types";
 
 type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   icon: string;
@@ -6,6 +7,7 @@ type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   selected: boolean;
   mt?: string;
   complementary?: InputHTMLAttributes<HTMLInputElement>;
+  error: boolean;
 };
 
 export const InputField: React.FC<InputFieldProps> = ({
@@ -14,11 +16,20 @@ export const InputField: React.FC<InputFieldProps> = ({
   selected,
   mt,
   complementary,
+  error,
   ...props
 }) => {
+  let className = "input__field";
+  switch (true) {
+    case selected:
+      className += " selected";
+      break;
+    case error:
+      className += " error";
+  }
   return (
     <div
-      className={selected ? "input__field selected" : "input__field"}
+      className={className}
       style={{ marginTop: mt }}
     >
       <img src={icon} alt="" className="input__field__icon" />

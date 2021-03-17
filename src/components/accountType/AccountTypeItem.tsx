@@ -1,26 +1,34 @@
 import "../../styles/AccountType.css";
 import thick from "../../Assets/tick.svg";
 import React, { InputHTMLAttributes } from "react";
+import { FieldError } from "../../types";
+import { setEmitFlags } from "typescript";
 
 export type AccountTypeItemProps = InputHTMLAttributes<HTMLInputElement> & {
   avator: string;
   name: string;
   selected: boolean;
+  error: boolean;
 };
 
 export const AccountTypeItem: React.FC<AccountTypeItemProps> = ({
   avator,
   name,
   selected,
+  error,
   ...props
 }) => {
+  let className = "account__type__item";
+
+  switch (true) {
+    case selected:
+      className += " selected";
+      break;
+    case error:
+      className += " error";
+  }
   return (
-    <div
-      {...props}
-      className={
-        !selected ? `account__type__item` : `account__type__item selected`
-      }
-    >
+    <div {...props} className={className}>
       <img src={avator} alt={name} className="account__type__item__avator" />
       <p>{name}</p>
       {!selected ? null : (
