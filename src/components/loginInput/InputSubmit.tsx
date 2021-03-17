@@ -4,7 +4,7 @@ type InputSubmitProps = InputHTMLAttributes<HTMLButtonElement> & {
   name: string;
   mt?: string;
   complementary?: InputHTMLAttributes<HTMLInputElement>;
-}
+};
 
 export const InputSubmit: React.FC<InputSubmitProps> = ({
   name,

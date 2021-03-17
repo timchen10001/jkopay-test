@@ -4,7 +4,7 @@ export const CheckAccountType = (accountType: string): FieldError | null => {
   if (accountType === "default") {
     return {
       field: "accountType",
-      message: "不可留空",
+      message: "請選擇 Account Type",
     };
   }
   return null;
@@ -14,7 +14,7 @@ export const CheckUserName = (username: string): FieldError | null => {
   if (!username.length) {
     return {
       field: "username",
-      message: "不可留空",
+      message: "請輸入使用者名稱",
     };
   }
   return null;
@@ -24,28 +24,29 @@ export const CheckPassword = (password: string): FieldError | null => {
   if (!password.length) {
     return {
       field: "password",
-      message: "不可留空",
+      message: "請輸入使用者密碼",
     };
   }
   return null;
 };
 
-export const CheckUserNamePassword = (input: {
-  username: string;
-  password: string;
-}): FieldError | null => {
+export const CheckSuccessiveNumber = (
+  a: string,
+  b: string,
+  successiveNumber: number
+): FieldError | null => {
   const hashTable: Record<string, boolean> = {};
-  if (input.username.length >= 6) {
-    for (let i = 0; i <= input.username.length - 6; i++) {
-      const splitUsername = input.username.slice(i, i + 6);
+  if (a.length >= successiveNumber && b.length >= successiveNumber) {
+    for (let i = 0; i <= a.length - successiveNumber; i++) {
+      const splitUsername = a.slice(i, i + successiveNumber);
       hashTable[splitUsername] = true;
     }
-    for (let i = 0; i <= input.password.length - 6; i++) {
-      const splitPassword = input.password.slice(i, i + 6);
+    for (let i = 0; i <= b.length - successiveNumber; i++) {
+      const splitPassword = b.slice(i, i + successiveNumber);
       if (hashTable[splitPassword]) {
         return {
           field: "password",
-          message: "密碼的任意連續 6 碼，不可以和帳號的任意連續 6 碼重複。",
+          message: `密碼的任意連續 ${successiveNumber} 碼，不可以和帳號的任意連續 ${successiveNumber} 碼重複。`,
         };
       }
     }

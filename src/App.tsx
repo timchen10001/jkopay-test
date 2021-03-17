@@ -1,3 +1,4 @@
+/*eslint no-cond-assign: ["error", "except-parens"]*/
 import React, { useState } from "react";
 import doctorAvator from "./Assets/img_doctor_90@3x.svg";
 import patientAvator from "./Assets/img_patient_90@3x.svg";
@@ -5,19 +6,18 @@ import bgImgTown from "./Assets/img_town_370x170@3x.svg";
 import { AccountType } from "./components/accountType/AccountType";
 import { BackgroundImage } from "./components/backgroundImage/BackgroundImage";
 import { LoginInput } from "./components/loginInput/LoginInput";
-import { useCancelError } from "./hooks/useCancelError";
 import { useStateValue } from "./StateProvider";
 import "./styles/App.css";
 import { FieldError } from "./types";
 import {
   CheckAccountType,
   CheckPassword,
+  CheckSuccessiveNumber,
   CheckUserName,
-  CheckUserNamePassword,
 } from "./utils/validators";
 
 function App() {
-  const [inputForm, dispatch] = useStateValue();
+  const [inputForm] = useStateValue();
   const [fieldError, setFieldError] = useState<FieldError | null>(null);
   return (
     <form
@@ -34,21 +34,24 @@ function App() {
         } else if ((error = CheckPassword(inputForm.password))) {
           setFieldError(error);
           return;
-        } else if ((error = CheckUserNamePassword({
-          username: inputForm.username,
-          password: inputForm.password
-        }))) {
+        } else if (
+          (error = CheckSuccessiveNumber(
+            inputForm.username,
+            inputForm.password,
+            6
+          ))
+        ) {
           setFieldError(error);
           return;
         }
-        
-        console.log({
-          inputForm
-        })
+        // ... 進行其餘檢查
+
+        alert(
+          `通過輸入測試！\n類型：${inputForm.accountType}\n使用者名稱：${inputForm.username}\n密碼：${inputForm.password}`
+        );
       }}
     >
       <AccountType
-        name="accountType"
         title={"Choose Account Type"}
         description={{
           default: "Hello user! \n Select a account type to get started",
@@ -67,15 +70,15 @@ function App() {
             replacements: ["patient"],
           },
           // {
-          //   avator: patient,
+          //   avator: patientAvator,
           //   name: "Student",
-          //   replacements: ["student"],
+          //   replacements: ["student"]
           // },
           // {
-          //   avator: doctor,
+          //   avator: doctorAvator,
           //   name: "Doctor",
-          //   replacements: ["doctor"],
-          // },
+          //   replacements: ["doctor"]
+          // }
           // 增加其餘 頭像與資訊於此
         ]}
       />

@@ -1,6 +1,6 @@
 :root {
-  --theme-color: #37b6eddc;
-  --default-color: #eaedf1;
+  --theme-color: #38B5ED;
+  --default-color: #EFF1F3;
   --default-font-color: #b1b1b1;
   --deep-default-font-color: #999999;
   --error-color: rgb(241, 41, 41);
@@ -8,6 +8,7 @@
 
 .App {
   position: relative;
+  height: 100vh;
 }
 
 .selected {

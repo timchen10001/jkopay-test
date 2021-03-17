@@ -1,5 +1,5 @@
-import "../../styles/BackgroundImage.css";
 import React from "react";
+import useRWD from "../../hooks/useRWD";
 
 interface BackgroundImageProps {
   bgImage: string;
@@ -8,9 +8,20 @@ interface BackgroundImageProps {
 export const BackgroundImage: React.FC<BackgroundImageProps> = ({
   bgImage,
 }) => {
+  const device = useRWD();
+  const isMobile = device === "mobile";
   return (
-    <div className="background__image">
-      <img src={bgImage} alt="bgImg" />
-    </div>
+    <img
+      src={bgImage}
+      alt="bgImg"
+      style={{
+        position: "fixed",
+        width: "100vw",
+        bottom: "0",
+        right: "3rem",
+        zIndex: -1,
+        opacity: isMobile ? ".8" : ".6"
+      }}
+    />
   );
 };

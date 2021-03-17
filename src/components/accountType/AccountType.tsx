@@ -12,7 +12,7 @@ import { AccountDescription } from "./AccountDescription";
 import { AccountTypeItem } from "./AccountTypeItem";
 
 type AccountTypeProps = InputHTMLAttributes<HTMLInputElement> & {
-  name: string;
+  name?: string;
   title: string;
   types: accountTypeInfo[];
   description: accountTypeDescriptionProps;
@@ -28,7 +28,6 @@ export const AccountType: React.FC<AccountTypeProps> = ({
   types,
   size: _,
   error,
-  ...props
 }) => {
   const [, dispatch] = useStateValue();
   const [select, setSelect] = useState(-1);
@@ -36,6 +35,7 @@ export const AccountType: React.FC<AccountTypeProps> = ({
   const device = useRWD();
   const isMobile = device === "mobile";
   const isNotSelected = select === -1;
+
   return (
     <div className="account__type">
       <h3 className="account__type__title">{title}</h3>
@@ -49,7 +49,7 @@ export const AccountType: React.FC<AccountTypeProps> = ({
             {...type}
             key={`account-type-${index}`}
             selected={select === index}
-            error={fieldError?.field === props.name}
+            error={fieldError?.field === "accountType"}
             onClick={() => {
               let accountType: string;
               if (select === index) {
@@ -68,12 +68,16 @@ export const AccountType: React.FC<AccountTypeProps> = ({
         ))}
       </ul>
       <p className="account__type__list__description">
-        <AccountDescription
-          description={
-            isNotSelected ? description.default : description.withState
-          }
-          replacements={isNotSelected ? [] : types[select].replacements}
-        />
+        {fieldError?.field ? (
+          <span style={{ color: "#F12A29" }}>{fieldError?.message}</span>
+        ) : (
+          <AccountDescription
+            description={
+              isNotSelected ? description.default : description.withState
+            }
+            replacements={isNotSelected ? [] : types[select].replacements}
+          />
+        )}
       </p>
     </div>
   );

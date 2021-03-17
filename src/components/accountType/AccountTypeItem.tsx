@@ -1,8 +1,6 @@
-import "../../styles/AccountType.css";
-import thick from "../../Assets/tick.svg";
 import React, { InputHTMLAttributes } from "react";
-import { FieldError } from "../../types";
-import { setEmitFlags } from "typescript";
+import thick from "../../Assets/tick.svg";
+import "../../styles/AccountType.css";
 
 export type AccountTypeItemProps = InputHTMLAttributes<HTMLInputElement> & {
   avator: string;
@@ -30,7 +28,7 @@ export const AccountTypeItem: React.FC<AccountTypeItemProps> = ({
   return (
     <div {...props} className={className}>
       <img src={avator} alt={name} className="account__type__item__avator" />
-      <p>{name}</p>
+      <p style={{ fontSize: "small" }}>{name}</p>
       {!selected ? null : (
         <img className="thick__icon" src={thick} alt={`thick icon`} />
       )}

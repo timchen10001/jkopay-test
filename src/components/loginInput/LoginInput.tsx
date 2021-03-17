@@ -43,7 +43,7 @@ export const LoginInput: React.FC<LoginInputProps> = ({ error }) => {
         }}
       />
       <InputField
-        mt="1rem"
+        mt="1.34rem"
         selected={select === "password"}
         icon={lockIcon}
         error={fieldError?.field === "password"}
@@ -60,7 +60,7 @@ export const LoginInput: React.FC<LoginInputProps> = ({ error }) => {
       />
 
       <InputSubmit
-        mt="1rem"
+        mt="1.34rem"
         name="Login"
         complementary={
           <p>

@@ -8,11 +8,13 @@
   position: relative;
   display: flex;
   align-items: center;
-  min-height: 8vh;
-  border: 1px solid var(--default-color);
+  height: 8vh;
+  border: 1.98px solid var(--default-color);
   border-radius: 5px;
   width: 80%;
   max-width: 400px;
+  background: #ffffff;
+  max-height: 50px;
 }
 .input__field__label {
   position: absolute;
@@ -36,6 +38,7 @@
   font-size: medium;
   border: none;
   padding: 0 1%;
+  background-color: "#FBFBFB";
 }
 .input__field__content:focus {
   outline: none;
@@ -46,8 +49,8 @@
   text-decoration: none;
   color: var(--theme-color);
   border-left: 1.5px solid var(--default-color);
-  padding: 0.35rem .7rem;
-  font-size: .8rem;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8rem;
 }
 
 .input__submit {
@@ -57,12 +60,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: .5rem;
+  font-size: 0.5rem;
 }
 .input__submit__complementary a {
   text-decoration: none;
   color: var(--theme-color);
-
+} .input__submit__complementary p {
+  font-weight: 700;
 }
 
 .input__submit__button {

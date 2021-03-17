@@ -1,5 +1,4 @@
 import React, { InputHTMLAttributes } from "react";
-import { FieldError } from "../../types";
 
 type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   icon: string;
@@ -28,10 +27,7 @@ export const InputField: React.FC<InputFieldProps> = ({
       className += " error";
   }
   return (
-    <div
-      className={className}
-      style={{ marginTop: mt }}
-    >
+    <div className={className} style={{ marginTop: mt }}>
       <img src={icon} alt="" className="input__field__icon" />
       <input {...props} className="input__field__content" />
       <div className="input__field__complementary">{complementary}</div>
