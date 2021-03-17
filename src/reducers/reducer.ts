@@ -12,24 +12,24 @@ export const actionTypes = {
   SET_PASSWORD: "SET_PASSWORD",
 };
 
-const reducer = (state: StateValue, action: Action): StateValue => {
-  console.log(action);
+const reducer = (state: StateValue, action: Action) => {
+  // console.log(action);
 
   switch (action.type) {
     case actionTypes.SET_ACCOUNT_TYPE:
       return {
         ...state,
-        accountType: action.actionType,
+        accountType: action.accountType,
       };
     case actionTypes.SET_USERNAME:
       return {
         ...state,
-        username: actionTypes.SET_USERNAME,
+        username: action.username,
       };
     case actionTypes.SET_PASSWORD:
       return {
         ...state,
-        password: actionTypes.SET_PASSWORD,
+        password: action.password,
       };
     default:
       return state;

@@ -22,7 +22,7 @@ export const InputField: React.FC<InputFieldProps> = ({
       style={{ marginTop: mt }}
     >
       <img src={icon} alt="" className="input__field__icon" />
-      <input {...props} type="text" className="input__field__content" />
+      <input {...props} className="input__field__content" />
       <div className="input__field__complementary">{complementary}</div>
       {!selected ? null : <p className="input__field__label">{name}</p>}
     </div>

@@ -7,11 +7,14 @@ import { actionTypes } from "../../reducers/reducer";
 import { useStateValue } from "../../StateProvider";
 import { InputField } from "./InputField";
 import { InputSubmit } from "./InputSubmit";
+import { validators } from "../../utils/validators";
+import { FieldError } from "../../types";
 
 interface LoginInputProps {}
 
 export const LoginInput: React.FC<LoginInputProps> = () => {
-  const [, dispatch] = useStateValue();
+  const [data, dispatch] = useStateValue();
+  const [fieldError, setFieldError] = useState<FieldError>();
   const [select, setSelect] = useState<"username" | "password" | undefined>();
 
   useCancelFocus((e) => {
@@ -21,7 +24,13 @@ export const LoginInput: React.FC<LoginInputProps> = () => {
   });
 
   return (
-    <div className="login__input">
+    <form className="login__input" onSubmit={e => {
+      e.preventDefault();
+      validators(data, (fieldError) => {
+        setFieldError(fieldError);
+      });
+      
+    }} >
       <InputField
         selected={select === "username"}
         icon={emailIcon}
@@ -39,6 +48,7 @@ export const LoginInput: React.FC<LoginInputProps> = () => {
         selected={select === "password"}
         icon={lockIcon}
         name="password"
+        type="password"
         onFocus={() => setSelect("password")}
         onChange={(e) => {
           dispatch({
@@ -51,13 +61,13 @@ export const LoginInput: React.FC<LoginInputProps> = () => {
 
       <InputSubmit
         mt="1rem"
+        name="Login"
         complementary={
           <p>
             No account? <a href="#">Signup</a>
           </p>
         }
-        name="Login"
       />
-    </div>
+    </form>
   );
 };
