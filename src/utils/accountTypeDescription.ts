@@ -14,5 +14,5 @@ export const accountTypeDescription = (
     }
     return sd;
   });
-  return replacedDesArr.join("").split('\n');
+  return replacedDesArr.join("").split("\n");
 };

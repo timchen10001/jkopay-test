@@ -1,5 +1,5 @@
 /*eslint no-cond-assign: ["error", "except-parens"]*/
-import React, { useState } from "react";
+import React from "react";
 import doctorAvator from "./Assets/img_doctor_90@3x.svg";
 import patientAvator from "./Assets/img_patient_90@3x.svg";
 import bgImgTown from "./Assets/img_town_370x170@3x.svg";
@@ -13,38 +13,38 @@ import {
   CheckAccountType,
   CheckPassword,
   CheckSuccessiveNumber,
-  CheckUserName,
+  CheckUserName
 } from "./utils/validators";
 
 function App() {
-  const [inputForm] = useStateValue();
-  const [fieldError, setFieldError] = useState<FieldError | null>(null);
+  const [inputForm, dispatch] = useStateValue();
   return (
     <form
       className="App"
       onSubmit={(e) => {
         e.preventDefault();
-        let error: FieldError | null = null;
-        if ((error = CheckAccountType(inputForm.accountType))) {
-          setFieldError(error);
-          return;
-        } else if ((error = CheckUserName(inputForm.username))) {
-          setFieldError(error);
-          return;
-        } else if ((error = CheckPassword(inputForm.password))) {
-          setFieldError(error);
-          return;
-        } else if (
-          (error = CheckSuccessiveNumber(
+        let fieldError: FieldError | null = null;
+        switch (true) {
+          case !!(fieldError = CheckAccountType(inputForm.accountType)):
+            break;
+          case !!(fieldError = CheckUserName(inputForm.username)):
+            break;
+          case !!(fieldError = CheckPassword(inputForm.password)):
+            break;
+          case !!(fieldError = CheckSuccessiveNumber(
             inputForm.username,
             inputForm.password,
             6
-          ))
-        ) {
-          setFieldError(error);
-          return;
+          )):
+            break;
+          // ... 進行其餘檢查
         }
-        // ... 進行其餘檢查
+        if (fieldError) {
+          return dispatch({
+            type: "SET_FIELD_ERROR",
+            fieldError
+          });
+        }
 
         alert(
           `通過輸入測試！\n類型：${inputForm.accountType}\n使用者名稱：${inputForm.username}\n密碼：${inputForm.password}`
@@ -55,25 +55,24 @@ function App() {
         title={"Choose Account Type"}
         description={{
           default: "Hello user! \n Select a account type to get started",
-          withState: `Hello $1! \n Please fill out the form below to get started`,
+          withState: `Hello $1! \n Please fill out the form below to get started`
         }}
-        error={[fieldError, setFieldError]}
         types={[
           {
             avator: doctorAvator,
             name: "Doctor",
-            replacements: ["doctor"],
+            replacements: ["doctor"]
           },
           {
             avator: patientAvator,
             name: "Patient",
-            replacements: ["patient"],
-          },
+            replacements: ["patient"]
+          }
           // {
           //   avator: patientAvator,
           //   name: "Student",
           //   replacements: ["student"]
-          // },
+          // }
           // {
           //   avator: doctorAvator,
           //   name: "Doctor",
@@ -82,7 +81,7 @@ function App() {
           // 增加其餘 頭像與資訊於此
         ]}
       />
-      <LoginInput error={[fieldError, setFieldError]} />
+      <LoginInput />
       <BackgroundImage bgImage={bgImgTown} />
     </form>
   );

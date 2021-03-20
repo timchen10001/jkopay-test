@@ -3,11 +3,7 @@ import useRWD from "../../hooks/useRWD";
 import { actionTypes } from "../../reducers/reducer";
 import { useStateValue } from "../../StateProvider";
 import "../../styles/AccountType.css";
-import {
-  accountTypeDescriptionProps,
-  accountTypeInfo,
-  FieldError,
-} from "../../types";
+import { accountTypeDescriptionProps, accountTypeInfo } from "../../types";
 import { AccountDescription } from "./AccountDescription";
 import { AccountTypeItem } from "./AccountTypeItem";
 
@@ -16,22 +12,16 @@ type AccountTypeProps = InputHTMLAttributes<HTMLInputElement> & {
   title: string;
   types: accountTypeInfo[];
   description: accountTypeDescriptionProps;
-  error: [
-    FieldError | null,
-    React.Dispatch<React.SetStateAction<FieldError | null>>
-  ];
 };
 
 export const AccountType: React.FC<AccountTypeProps> = ({
   title,
   description,
   types,
-  size: _,
-  error,
+  size: _
 }) => {
-  const [, dispatch] = useStateValue();
+  const [{ fieldError }, dispatch] = useStateValue();
   const [select, setSelect] = useState(-1);
-  const [fieldError, setFieldError] = error;
   const device = useRWD();
   const isMobile = device === "mobile";
   const isNotSelected = select === -1;
@@ -42,7 +32,7 @@ export const AccountType: React.FC<AccountTypeProps> = ({
       <ul
         className="account__type__list__item"
         style={{ cursor: isMobile ? "none" : "pointer" }}
-        onClick={() => setFieldError(null)}
+        onClick={() => dispatch({ type: "SET_FIELD_ERROR", fieldError: null })}
       >
         {types.map((type, index) => (
           <AccountTypeItem
@@ -61,7 +51,7 @@ export const AccountType: React.FC<AccountTypeProps> = ({
               }
               dispatch({
                 type: actionTypes.SET_ACCOUNT_TYPE,
-                accountType,
+                accountType
               });
             }}
           />

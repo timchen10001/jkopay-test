@@ -9,12 +9,13 @@
   display: flex;
   align-items: center;
   height: 8vh;
-  border: 1.98px solid var(--default-color);
+  max-height: 50px;
+  min-height: 40px;
+  border: 1.9px solid var(--default-color);
   border-radius: 5px;
-  width: 80%;
+  width: 85%;
   max-width: 400px;
   background: #ffffff;
-  max-height: 50px;
 }
 .input__field__label {
   position: absolute;
@@ -28,17 +29,17 @@
 }
 
 .input__field__icon {
-  max-width: 1.65rem;
+  max-width: 1.2rem;
   margin: 0.5rem;
 }
 
 .input__field__content {
   flex: 1;
-  height: 2rem;
-  font-size: medium;
+  height: 90%;
+  font-size: small;
   border: none;
   padding: 0 1%;
-  background-color: "#FBFBFB";
+  overflow: hidden;
 }
 .input__field__content:focus {
   outline: none;
@@ -50,11 +51,11 @@
   color: var(--theme-color);
   border-left: 1.5px solid var(--default-color);
   padding: 0.35rem 0.7rem;
-  font-size: 0.8rem;
+  font-size: small;
 }
 
 .input__submit {
-  width: 80%;
+  width: 85%;
   max-width: 400px;
   color: var(--deep-default-font-color);
   display: flex;
@@ -65,15 +66,17 @@
 .input__submit__complementary a {
   text-decoration: none;
   color: var(--theme-color);
-} .input__submit__complementary p {
-  font-weight: 700;
+}
+.input__submit__complementary p {
+  font-size: small;
+  font-weight: 650;
 }
 
 .input__submit__button {
   background-color: var(--theme-color);
   border: none;
   color: white;
-  padding: 0.6rem 2rem;
+  padding: 0.7rem 2rem;
   border-radius: 6px;
 }
 .input__submit__button:focus {

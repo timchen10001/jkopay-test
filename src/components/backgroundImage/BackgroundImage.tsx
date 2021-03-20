@@ -6,7 +6,7 @@ interface BackgroundImageProps {
 }
 
 export const BackgroundImage: React.FC<BackgroundImageProps> = ({
-  bgImage,
+  bgImage
 }) => {
   const device = useRWD();
   const isMobile = device === "mobile";
@@ -17,7 +17,7 @@ export const BackgroundImage: React.FC<BackgroundImageProps> = ({
       style={{
         position: "fixed",
         width: "100vw",
-        bottom: "0",
+        bottom: "-50px",
         right: "3rem",
         zIndex: -1,
         opacity: isMobile ? ".8" : ".6"

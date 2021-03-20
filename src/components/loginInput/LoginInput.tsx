@@ -5,20 +5,14 @@ import { useCancelFocus } from "../../hooks/useCancelFocus";
 import { actionTypes } from "../../reducers/reducer";
 import { useStateValue } from "../../StateProvider";
 import "../../styles/LoginInput.css";
-import { FieldError } from "../../types";
 import { InputField } from "./InputField";
 import { InputSubmit } from "./InputSubmit";
 
-interface LoginInputProps {
-  error: [
-    FieldError | null,
-    React.Dispatch<React.SetStateAction<FieldError | null>>
-  ];
-}
+interface LoginInputProps {}
 
-export const LoginInput: React.FC<LoginInputProps> = ({ error }) => {
-  const [fieldError, setFieldError] = error;
-  const [, dispatch] = useStateValue();
+export const LoginInput: React.FC<LoginInputProps> = () => {
+  // const [fieldError, setFieldError] = error;
+  const [{ fieldError }, dispatch] = useStateValue();
   const [select, setSelect] = useState<"username" | "password" | undefined>();
 
   useCancelFocus((e) => {
@@ -28,39 +22,46 @@ export const LoginInput: React.FC<LoginInputProps> = ({ error }) => {
   });
 
   return (
-    <div className="login__input" onChange={() => setFieldError(null)}>
+    <div
+      className="login__input"
+      onChange={() => dispatch({ type: "SET_FIELD_ERROR", fieldError: null })}
+    >
       <InputField
         selected={select === "username"}
         icon={emailIcon}
         error={fieldError?.field === "username"}
         name="username"
+        placeholder="Username"
+        autoComplete="username"
         onFocus={() => setSelect("username")}
         onChange={(e) => {
           dispatch({
             type: actionTypes.SET_USERNAME,
-            username: e.target.value,
+            username: e.target.value
           });
         }}
       />
       <InputField
-        mt="1.34rem"
+        mt="1rem"
         selected={select === "password"}
         icon={lockIcon}
         error={fieldError?.field === "password"}
         name="password"
         type="password"
+        autoComplete="current-password"
+        placeholder="Password"
         onFocus={() => setSelect("password")}
         onChange={(e) => {
           dispatch({
             type: actionTypes.SET_PASSWORD,
-            password: e.target.value,
+            password: e.target.value
           });
         }}
         complementary={<a href="#">Forgot?</a>}
       />
 
       <InputSubmit
-        mt="1.34rem"
+        mt="1.45rem"
         name="Login"
         complementary={
           <p>
