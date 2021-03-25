@@ -1,5 +1,4 @@
 import React, { InputHTMLAttributes, useState } from "react";
-import useRWD from "../../hooks/useRWD";
 import { actionTypes } from "../../reducers/reducer";
 import { useStateValue } from "../../StateProvider";
 import "../../styles/AccountType.css";
@@ -22,8 +21,6 @@ export const AccountType: React.FC<AccountTypeProps> = ({
 }) => {
   const [{ fieldError }, dispatch] = useStateValue();
   const [select, setSelect] = useState(-1);
-  const device = useRWD();
-  const isMobile = device === "mobile";
   const isNotSelected = select === -1;
 
   return (
@@ -31,12 +28,12 @@ export const AccountType: React.FC<AccountTypeProps> = ({
       <h3 className="account__type__title">{title}</h3>
       <ul
         className="account__type__list__item"
-        style={{ cursor: isMobile ? "none" : "pointer" }}
         onClick={() => dispatch({ type: "SET_FIELD_ERROR", fieldError: null })}
       >
         {types.map((type, index) => (
           <AccountTypeItem
             {...type}
+            style={{ cursor: "pointer" }}
             key={`account-type-${index}`}
             selected={select === index}
             error={fieldError?.field === "accountType"}

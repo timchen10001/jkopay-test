@@ -80,7 +80,9 @@
   border-radius: 6px;
 }
 .input__submit__button:focus {
-  cursor: pointer;
   outline: none;
   border: none;
+}
+.input__submit__button:hover {
+  cursor: pointer;
 }
